@@ -1,0 +1,99 @@
+    /*paraAnnotations=service.getMethod().getParameterAnnotations();
+    int k,j;
+    for(k=0;k<paraAnnotations.length;k++)
+    {
+     for(j=0;j<paraAnnotations[k].length;j++)
+     {
+    
+     }
+    }*/
+
+
+package com.thinking.machines.servlets;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import com.google.gson.Gson;
+import com.thinking.machines.beans.*;
+
+public class SquareAndFactorialServlet extends HttpServlet
+{
+ public int fact(int f)
+ {
+  int fct=1;
+  while(f>=1)
+  {
+   fct*=f;
+   f--;
+  }
+  return fct;
+ }
+ public void doPost(HttpServletRequest request,HttpServletResponse response)
+ {
+  SquareAndFactorialBean safb=new SquareAndFactorialBean();
+  PrintWriter pw=null;
+  AjaxResponse ajax=null;
+  InputStreamReader isr;
+  Scanner sc;
+  StringBuffer sb=null;
+  Gson gson=new Gson();
+  DataBean data=null;
+  try
+  {
+   isr=new InputStreamReader(request.getInputStream());
+   sc=new Scanner(isr);
+   pw=response.getWriter();
+   sb=new StringBuffer();
+   while(sc.hasNext())
+   {
+    sb.append(sc.nextLine());
+   }
+   System.out.println(sb.toString());
+   data=gson.fromJson(sb.toString(), DataBean.class);
+   safb.setSquare(data.getNum1()*data.getNum1());
+   safb.setFactorial(fact(data.getNum2()));
+   ajax=new AjaxResponse();  
+   ajax.setResponse(safb);
+   ajax.setSuccess(true);
+   ajax.setException(""); 
+  }catch(Exception e)
+  {
+   ajax.setResponse("");
+   ajax.setSuccess(false);
+   ajax.setException(e);
+  }
+  String responseString=gson.toJson(ajax);
+  pw.println(responseString);
+ }
+}
+
+
+
+if(argType[k].getCanonicalName()=="int" || argType[k].newInstance() instanceof Integer)
+      arguments.add(Integer.parseInt(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));
+     
+      else if(argType[k].getCanonicalName()=="byte" || argType[k].newInstance() instanceof Integer)
+      arguments.add(Integer.parseInt(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+
+      else if(argType[k].getCanonicalName()=="short" || argType[k].newInstance() instanceof Short)
+      arguments.add(Short.parseShort(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+  
+      else if(argType[k].getCanonicalName()=="long" || argType[k].newInstance() instanceof Long)
+      arguments.add(Long.parseLong(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+
+      else if(argType[k].getCanonicalName()=="char" || argType[k].newInstance() instanceof Character)
+      arguments.add((request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())).charAt(0));  
+
+      else if(argType[k].getCanonicalName()=="float" || argType[k].newInstance() instanceof Float)
+      arguments.add(Float.parseFloat(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+
+      else if(argType[k].getCanonicalName()=="double" || argType[k].newInstance() instanceof Double)
+      arguments.add(Double.parseDouble(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+
+      else if(argType[k].getCanonicalName()=="boolean" || argType[k].newInstance() instanceof Boolean)
+      arguments.add(Boolean.parseBoolean(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value())));  
+
+      else if(argType[k].newInstance() instanceof String)
+      arguments.add(request.getParameter(((com.thinking.machines.test.RequestData)paraAnnotations[k][j]).value()));
