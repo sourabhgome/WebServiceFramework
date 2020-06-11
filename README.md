@@ -2,7 +2,7 @@
 This framework is made with an objective of saving employees from writing complex servlet's code. Basic motive of this framework is to save employee's as well as company's time. With the use of this framework one can create a servlet using simple java code and our framework will take care of that code and will convert it into proper java servlet.
 
 # Installation 
-**Step 1:** Download the TMServiceFramework.jar and copy it to WEB-INF\lib folder.
+**Step 1:** Download the TMServiceFramework.jar and copy it to WEB-INF\lib folder. Also download necessary itext jar files.
 
 **Step 2:** Edit the contents of web.xml and write the given code in it.
 
